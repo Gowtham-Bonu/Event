@@ -1,0 +1,28 @@
+<h1>New Event</h1>
+
+<%= form_with model: @event, url: user_events_path do |form| %>
+  <div class="card container" >
+      <div class="card-body" >
+          <div class="mb-3" >
+            <%= form.label :name, {class: "form-label"}   %><br>
+            <%= form.text_field :name, {class: "form-control", placeholder: " Name"}  %>
+            <% @event.errors.full_messages_for(:name).each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+            </div>
+            <div class="mb-3" >
+              <%= form.label :description, {class: "form-label"}   %><br>
+              <%= form.text_field :description, {class: "form-control", placeholder: " Description "}   %><br>
+            </div>
+            <%= form.date_field :event_date, {class: "form-control", placeholder: " Date"}  %>
+            <% @event.errors.full_messages_for(:event_date).each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+            <div class="col-4">
+                <% options = options_from_collection_for_select(@categories, 'id', 'category') %>
+                <%= form.select :category_id, options %>
+            <div>
+              <%= form.submit %>
+            </div>
+        </div>
+<% end %>
