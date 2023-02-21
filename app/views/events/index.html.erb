@@ -3,16 +3,35 @@
     <li><%= event.name %></li>
 <% end %>
 </ul> -->
-<div><div><%= link_to "music" %><div><%= link_to "visual" %></div><div><%= link_to "film" %></div><div><%= link_to "fashion" %></div><div><%= link_to "writing" %></div></div>
-<table>
+<nav class="nav" >
+  <% @categories.each do |c| %>
+  <div>
+  <a href="/events/filter/<%= c.id %>"><%= c.category %></a>
+  </div>
+  <% end %>
+</nav>
+<div class="event" >
+<table class="table" >
   <tr>
     <th>Event</th>
     <th>Action</th>
   </tr>
 <% @events.each do |event| %>
     <tr>
-        <td><%= event.name %></td>
-        <td><a href="/events/enroll/<%= event.id %>" >enroll</a></td>
+        <td><%= link_to event.name, user_event_path(@user, event) %></td>
+        <% if @user.events .include?(event)%>
+          <td><span><a href="/events/enroll/<%= event.id %>" >enrolled</a></span></td>
+        <% else %>
+          <td><span><a href="/events/enroll/<%= event.id %>" >enroll</a></span></td>
+        <% end %>
+        <td><%= form_with model: @comment, url: user_comments_path do |form| %>
+          <%= form.text_field :comment_name, {class: "form-control", placeholder: "Comment"}%>
+          <%= form.hidden_field :event_id, value: event.id %>
+          <%= form.submit %>
+        <% end %>
+        </td>
     </tr>
 <% end %>
 </table>
+</div>
+

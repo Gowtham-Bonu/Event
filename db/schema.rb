@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_17_124331) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_20_115553) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_124331) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "comment_name"
+    t.bigint "commentable_id"
+    t.string "commentable_type"
+    t.bigint "comments_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comments_id"], name: "index_comments_on_comments_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "enrolls", force: :cascade do |t|
@@ -50,6 +62,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_124331) do
     t.index ["creator_id"], name: "index_events_on_creator_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_likes_on_comment_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -58,5 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_124331) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "comments", column: "comments_id"
+  add_foreign_key "comments", "users"
+  add_foreign_key "events", "categories"
   add_foreign_key "events", "users", column: "creator_id"
 end

@@ -13,3 +13,75 @@
  *= require_tree .
  *= require_self
  */
+li{
+    list-style-type: none;
+}
+.login{
+    background-color: rgb(216, 216, 255);
+    height: 80vh;
+    text-align: center;
+    padding: 80px;
+}
+.login h1{
+    color: black;
+    font-weight: bolder;
+}
+.btn-submit{
+    border: 0px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: bold;
+    padding: 10px;
+}
+.form-control{
+    margin: 30px;
+}
+.footer{
+    padding: 50px;
+}
+.footer li{
+    margin: 20px;
+}
+.login p{
+    font-weight: 800;
+    font-style: italic;
+    color: black;
+}
+.link{
+    padding: 20px;
+}
+.new_event{
+    background-color: rgb(216, 216, 255);;
+    height: 100vh;
+    text-align: center;
+    padding: 80px;
+}
+.new_event h1{
+    color: black;
+    font-weight: bolder;
+}
+.form-label{
+    color: black;
+}
+.nav{
+    padding: 20px;
+    background-color: rgb(179, 179, 220);;
+    display: flex;
+    justify-content: space-around;
+}
+.nav div{
+    padding: 20px;
+    margin: 20px;
+}
+.event{
+    background-color: rgb(216, 216, 255);
+}
+.event_show{
+    text-align: center;
+}
+.enrolled{
+    font-weight: 600;
+    font-style: italic;
+    text-decoration: underline;
+    font-size: 30px;
+}

@@ -1,5 +1,7 @@
-<h1>Hii <%= @user.name %>!</h1>
-<p>You can create some events over here</p>
-<%= link_to "create", new_user_event_path(@user) %>
-<%= link_to "events list", user_events_path(@user) %>
-<%= link_to "profile", user_path(@user) %>
+<div class="login" >
+    <h1>Hii <%= @user.name %>!</h1>
+    <p>You can explore some events over here</p>
+    <div class="link" ><%= link_to "create a new event ", new_user_event_path(@user) %></div>
+    <div class="link" ><%= link_to "events list", user_events_path(@user) %></div>
+    <div class="link" ><%= link_to "profile", user_path(@user) %></div>
+</div>

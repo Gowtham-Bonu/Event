@@ -5,11 +5,15 @@ Rails.application.routes.draw do
   # root "articles#index"
   root "users#new"
   get '/logout' => 'sessions#destroy'
+  get '/comments/like/:comment_id/:event_id' => 'comments#like'
   post 'login' => 'sessions#create'
   get '/login' => 'sessions#new'
   get 'signup'  => 'users#new'
   get "/events/enroll/:id" => 'events#enroll'
+  get "/events/filter/:category" => "events#filter"
+
   resources :users do 
     resources :events
+    resources :comments
   end
 end

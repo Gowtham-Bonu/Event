@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
     def index
+        @user = User.find(session[:user_id])
         @events = Event.all.order(:event_date).reverse_order
+        @categories = Category.all
     end
 
     def new
@@ -9,10 +11,8 @@ class EventsController < ApplicationController
     end
 
     def create
-        @event = Event.new(name: event_params[:name], description: event_params[:description], event_date: event_params[:event_date])
+        @event = Event.new(name: event_params[:name], description: event_params[:description], event_date: event_params[:event_date], category_id: event_params[:category_id])
         @event.creator_id = session[:user_id]
-        @category = Category.find(event_params[:category_id])
-        @event.create_category(category: @category.category)
 
         if @event.save
             redirect_to users_path
@@ -25,11 +25,21 @@ class EventsController < ApplicationController
         @user = User.find(session[:user_id])
         @enrolled_event = Event.find(params[:id])
         if @user.events.include?(@enrolled_event)
-            redirect_to users_path
+            redirect_to user_events_path(@user)
         else
             @user.events << @enrolled_event
-            redirect_to users_path
+            redirect_to user_events_path(@user)
         end
+    end
+
+    def filter
+        @events = Event.all.where(category_id: params[:category])
+    end
+
+    def show
+        @event = Event.find(params[:id])
+        @user = User.find(session[:user_id])
+        @likes = Like.all
     end
 
     private

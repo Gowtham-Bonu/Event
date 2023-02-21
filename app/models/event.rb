@@ -3,5 +3,6 @@ class Event < ApplicationRecord
     has_many :enrolls
     has_many :users, through: :enrolls
     belongs_to :category
-    validates :name, :event_date, presence: true
+    has_many :comments, as: :commentable
+    validates :name, :event_date, :category, presence: true
 end
