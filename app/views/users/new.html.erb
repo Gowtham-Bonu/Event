@@ -2,12 +2,15 @@
     <div class="card-body">
     <div class="form">
     <h1>Sign up</h1>
+    <p>If already a user? <%= link_to "login page", login_path %></p>
+    <% link_to "login page", login_path %>
     <%= form_for(@user) do |f| %>
     <%= f.text_field :name, {class: "form-control", placeholder: "Name"}  %>
     <%= f.email_field :email, {class: "form-control", placeholder: "Email"}  %>
     <%= f.password_field :password, {class: "form-control", placeholder: "Password"} %>
     <%= f.text_field :address,{class: "form-control", placeholder: "Address"}  %>
     <%= f.submit "Create an account", class: "btn-submit" %>
+    <% link_to "login page", login_path %>
     <% end %>
     </div>
     </div>
