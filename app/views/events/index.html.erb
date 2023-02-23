@@ -14,7 +14,7 @@
 <table class="table" >
   <tr>
     <th>Event</th>
-    <th>Action</th>
+    <th colspan="4" >Actions</th>
   </tr>
 <% @events.each do |event| %>
     <tr>
@@ -24,6 +24,11 @@
         <% else %>
           <td><span><a href="/events/enroll/<%= event.id %>" >enroll</a></span></td>
         <% end %>
+        <td><%= link_to "Edit", edit_user_event_path(@user, event) %></td>
+        <td><%= link_to "Destroy", user_event_path(@user, event), data: {
+         turbo_method: :delete,
+         turbo_confirm: "Are you sure?"
+         } %></td>
         <td><%= form_with model: @comment, url: user_comments_path do |form| %>
           <%= form.text_field :comment_name, {class: "form-control", placeholder: "Comment"}%>
           <%= form.hidden_field :event_id, value: event.id %>

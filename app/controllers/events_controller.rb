@@ -21,6 +21,22 @@ class EventsController < ApplicationController
         end
     end
 
+    def edit
+        @event = @event = Event.find(params[:id])
+        @categories = Category.all
+    end
+    
+    def update
+        @event = Event.find(params[:id])
+        @user = User.find(session[:user_id])
+    
+        if @event.update(name: event_params[:name], description: event_params[:description], event_date: event_params[:event_date], category_id: event_params[:category_id])
+            redirect_to user_events_path(@user)
+        else
+            render :edit, status: :unprocessable_entity
+        end
+    end
+
     def enroll
         @user = User.find(session[:user_id])
         @enrolled_event = Event.find(params[:id])
@@ -32,6 +48,7 @@ class EventsController < ApplicationController
         end
     end
 
+
     def filter
         @events = Event.all.where(category_id: params[:category])
     end
@@ -41,6 +58,14 @@ class EventsController < ApplicationController
         @user = User.find(session[:user_id])
         @likes = Like.all
     end
+
+    def destroy
+        @event = Event.find(params[:id])
+        @user = User.find(session[:user_id])
+        @event.destroy
+    
+        redirect_to user_events_path(@user), status: :see_other
+      end    
 
     private
 
