@@ -2,8 +2,8 @@
     <div class="form">
         <h1>Log In</h1>
         <%= form_for(:session, url: login_path) do |f| %>
-        <%= f.email_field :email, {class: "form-control", placeholder: "Name"}  %>
-        <%= f.password_field :password, {class: "form-control", placeholder: "Name"}  %>
+        <%= f.email_field :email, {class: "form-control", placeholder: "Email"}  %>
+        <%= f.password_field :password, {class: "form-control", placeholder: "Password"}  %>
         <%= f.submit "Log in", class: "btn-submit" %>
         <% end %>
     </div>
